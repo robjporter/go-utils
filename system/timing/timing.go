@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/robjporter/go-functions/as"
+	"github.com/robjporter/go-utils/go/as"
 )
 
 var timers map[string]string

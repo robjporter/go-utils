@@ -1,7 +1,7 @@
 package count
 
 import (
-	"github.com/robjporter/go-functions/as"
+	"github.com/robjporter/go-utils/go/as"
 )
 
 type Sequence <-chan int

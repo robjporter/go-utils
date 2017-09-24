@@ -12,7 +12,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/robjporter/go-functions/as"
+	"github.com/robjporter/go-utils/go/as"
 )
 
 const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

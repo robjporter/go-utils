@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"../../go/as"
+	"github.com/robjporter/go-utils/go/as"
 )
 
 var (

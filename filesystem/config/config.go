@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"../../go/as"
+	"github.com/robjporter/go-utils/go/as"
 	yaml "pkg.re/yaml.v2"
 )
 

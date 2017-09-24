@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"io"
 
-	"github.com/robjporter/go-functions/format/as"
+	"github.com/robjporter/go-utils/go/as"
 )
 
 func encodeBase64(b []byte) string {
