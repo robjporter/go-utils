@@ -20,7 +20,7 @@ func Timer(name string) string {
 		timers[name] = as.ToString(time.Now().Round(time.Second))
 	} else {
 		end := time.Now().Round(time.Second)
-		return as.ToString(end.Sub(as.ToTime(timers[name])))
+		return as.ToString(end.Sub(as.ToTime(true, timers[name])))
 	}
 	return ""
 }

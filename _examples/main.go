@@ -7,37 +7,39 @@ import (
 	"syscall"
 	"time"
 
-	"./cron"
-	"./encode/json"
-	"./filesystem/files"
-	"./filesystem/path"
-	"./go/as"
-	"./go/count"
-	"./go/each"
-	"./go/hashmap"
-	"./go/iff"
-	"./go/is"
-	"./go/rwmap"
-	"./go/safemap"
-	"./go/text"
-	"./maths"
-	"./scheduler"
-	"./sort"
-	"./system"
-	"./system/environment"
-	"./system/ipfilter"
-	"./system/signals"
-	"./template"
-	"./terminal/banner"
-	"./terminal/colours"
-	"./terminal/display"
-	"./terminal/rainbow"
-	"./terminal/table"
-	"./timedate/dates"
-	"./timedate/duration"
-	"./timedate/times"
-	"./timing"
-	"./version"
+	"../filesystem/files"
+	"../filesystem/path"
+	"../go/as"
+	"../go/count"
+	"../go/each"
+	"../go/encode/json"
+	"../go/hashmap"
+	"../go/iff"
+	"../go/is"
+	"../go/maths"
+	"../go/rwmap"
+	"../go/safemap"
+	"../go/sort"
+	"../go/text"
+	"../go/timedate/dates"
+	"../go/timedate/duration"
+	"../go/timedate/times"
+	"../go/version"
+	"../system/cron"
+	"../system/environment"
+	"../system/ipfilter"
+	"../system/memory"
+	"../system/network"
+	"../system/scheduler"
+	"../system/signals"
+	"../system/timing"
+	"../system/users"
+	"../terminal/banner"
+	"../terminal/colours"
+	"../terminal/display"
+	"../terminal/rainbow"
+	"../terminal/table"
+	"../web/template"
 )
 
 var cronjob, cronjob2 *cron.CronJob
@@ -110,8 +112,8 @@ func setupschedulersandinitiate() {
 func displaymemoryutilisation() {
 	fmt.Println("")
 	fmt.Println("MEMORY *******************************************************")
-	fmt.Println("Memory Allocated:             >", system.MemAllocated())
-	fmt.Println("Memory In Use:                >", system.MemInUse())
+	fmt.Println("Memory Allocated:             >", memory.MemAllocated())
+	fmt.Println("Memory In Use:                >", memory.MemInUse())
 }
 
 func displayfinishtimer() {
@@ -436,7 +438,7 @@ func getfilepaths() {
 		fmt.Println("Path:                          >", dir)
 		fmt.Println("Splitpath:                     >", path.SplitPath(dir))
 		fmt.Println("Get Path:                      >", path.GetPath(dir))
-		fmt.Println("Get File MD5:                  >", path.GetFileMd5("/Users/roporter/Documents/Development/Work/MyDevelopment/is/main.go"))
+		fmt.Println("Get File MD5:                  >", path.GetFileMd5("./main.go"))
 		fmt.Println("Parentpath:                    >", path.ParentPath(dir))
 		fmt.Println("Relativepath:                  >", path.RelativePath(dir, path.ParentPath(path.ParentPath(dir))))
 		fmt.Println("BaseName:                      >", path.BaseName(dir))
@@ -483,10 +485,14 @@ func cleantext() {
 func uuid() {
 	fmt.Println("")
 	fmt.Println("TEXT UUID *******************************************************")
-	fmt.Println("UUID                              >", text.UUID())
-	fmt.Println("UUID                              >", text.UUID())
-	fmt.Println("UUID                              >", text.UUID())
-	fmt.Println("UUID                              >", text.UUID())
+	t, _ := text.UUID4()
+	fmt.Println("UUID                              >", t)
+	t, _ = text.UUID4()
+	fmt.Println("UUID                              >", t)
+	t, _ = text.UUID4()
+	fmt.Println("UUID                              >", t)
+	t, _ = text.UUID4()
+	fmt.Println("UUID                              >", t)
 }
 
 func wordfrequency() {
@@ -515,7 +521,6 @@ func announcements() {
 	fmt.Println("")
 	fmt.Println("TEXT ANNOUNCEMENTS *******************************************************")
 	fmt.Println("Announce (message)                >", text.Announcement("test"))
-	fmt.Println("Make Announce (Message)           >", text.MakeAnnouncement("testy"))
 }
 
 func textfuncs() {
@@ -1129,7 +1134,7 @@ func timeanddatefuncs() {
 func systemusername() {
 	fmt.Println("")
 	fmt.Println("SYSTEM USERNAME *******************************************************")
-	fmt.Println("Current Username:                 >", system.GetUsername())
+	fmt.Println("Current Username:                 >", users.GetUsername())
 }
 
 func systemenvironments() {
@@ -1156,17 +1161,26 @@ func systemenvironments() {
 func networking() {
 	fmt.Println("")
 	fmt.Println("SYSTEM IS PRIVATE IP *******************************************************")
-	fmt.Println("IS PRIVATE IP 1.1.1.1:            >", system.IsPrivateIp("1.1.1.1"))
-	fmt.Println("IS PRIVATE IP 10.52.208.1:        >", system.IsPrivateIp("10.52.208.1"))
-	fmt.Println("IS PUBLIC IP 1.1.1.1:             >", system.IsPublicIp("1.1.1.1"))
-	fmt.Println("IS PUBLIC IP 10.52.208.1:         >", system.IsPublicIp("10.52.208.1"))
+	fmt.Println("IS PRIVATE IP 1.1.1.1:            >", network.IsPrivateIP("1.1.1.1"))
+	fmt.Println("IS PRIVATE IP 10.52.208.1:        >", network.IsPrivateIP("10.52.208.1"))
+	fmt.Println("IS PUBLIC IP 1.1.1.1:             >", network.IsPublicIP("1.1.1.1"))
+	fmt.Println("IS PUBLIC IP 10.52.208.1:         >", network.IsPublicIP("10.52.208.1"))
+	t, _ := network.Atoi("1.1.1.1")
+	fmt.Println("IS IP TO INT 1.1.1.1:             >", t)
+	t, _ = network.Atoi("10.52.208.1")
+	fmt.Println("IS IP TO INT 10.52.208.1:         >", t)
+	t2, _ := network.Itoa(3232235521)
+	fmt.Println("IS INT TO IP 3232235521:          >", t2)
+	t2, _ = network.Itoa(171233281)
+	fmt.Println("IS INT TO IP 171233281:           >", t2)
+
 }
 
 func httpget() {
 	fmt.Println("")
 	fmt.Println("SYSTEM HTTP GET *******************************************************")
-	e := DownloadFile("https://github.com/metaleap/go-util-net/raw/master/net.go", "./file.txt")
-	fmt.Println("HTTP GET ON FILE:                 >", e)
+	//e := httpget.DownloadFile("https://github.com/metaleap/go-util-net/raw/master/net.go", "./file.txt")
+	//fmt.Println("HTTP GET ON FILE:                 >", e)
 }
 
 func systemfuncs() {
@@ -1506,7 +1520,7 @@ func lines() {
 	fmt.Println("TERMINAL LINES **********************************************")
 	fmt.Println("TERMINAL THINK LINE                >", display.ThickLine(40))
 	fmt.Println("TERMINAL THIN LINE                 >", display.ThinLine(40))
-	fmt.Println("TERMINAL SPECIAL LINE              >", display.Specialine(40))
+	fmt.Println("TERMINAL SPECIAL LINE              >", display.SpecialLine(40))
 	fmt.Println("TERMINAL SPACE LINE                >", display.SpaceLine(40))
 }
 
