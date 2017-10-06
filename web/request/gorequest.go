@@ -30,7 +30,7 @@ import (
 
 	"github.com/moul/http2curl"
 	"github.com/robjporter/go-utils/go/as"
-	"github.com/robjporter/go-utils/vcr/recorder"
+	"github.com/robjporter/go-utils/web/vcr/recorder"
 	"golang.org/x/net/publicsuffix"
 )
 

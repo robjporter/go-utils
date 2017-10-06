@@ -4,9 +4,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/robjporter/go-functions/as"
-	"github.com/robjporter/go-functions/jmespath"
-	"github.com/robjporter/go-functions/request"
+	"github.com/robjporter/go-utils/go/as"
+	"github.com/robjporter/go-utils/web/request"
 )
 
 const (
@@ -121,7 +120,7 @@ func getJSONData(jsonstr string, element string) string {
 		var data2 interface{}
 		json.Unmarshal([]byte(jsonstr), &data2)
 
-		tmp, err := jmespath.Search(element, data2)
+		tmp, err := "", "" //jmespath.Search(element, data2)
 		if err == nil {
 			output = as.ToString(tmp)
 		}

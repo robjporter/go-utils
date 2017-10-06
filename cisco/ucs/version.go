@@ -2,8 +2,9 @@ package ucs
 
 import (
 	"fmt"
-	"github.com/robjporter/go-functions/request"
 	"strings"
+
+	"github.com/robjporter/go-utils/web/request"
 )
 
 const (
