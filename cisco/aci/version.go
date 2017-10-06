@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/robjporter/go-functions/as"
-	"github.com/robjporter/go-functions/request"
+	"github.com/robjporter/go-utils/go/as"
+	"github.com/robjporter/go-utils/web/request"
 )
 
 const (

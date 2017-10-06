@@ -5,9 +5,9 @@ import (
 
 	"strings"
 
-	"github.com/robjporter/go-functions/as"
-	"github.com/robjporter/go-functions/request"
-	xmlx "github.com/robjporter/go-functions/xml"
+	"github.com/robjporter/go-utils/go/as"
+	xmlx "github.com/robjporter/go-utils/go/encode/xml"
+	"github.com/robjporter/go-utils/web/request"
 )
 
 const (
