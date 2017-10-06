@@ -29,8 +29,8 @@ import (
 	"path/filepath"
 
 	"github.com/moul/http2curl"
-	"github.com/robjporter/go-functions/as"
-	"github.com/robjporter/go-functions/vcr/recorder"
+	"github.com/robjporter/go-utils/go/as"
+	"github.com/robjporter/go-utils/vcr/recorder"
 	"golang.org/x/net/publicsuffix"
 )
 
