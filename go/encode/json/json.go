@@ -21,3 +21,11 @@ func PrettyJson(data interface{}) (string, error) {
 	}
 	return buffer.String(), nil
 }
+
+func CompactJSON(in string) string {
+	var out bytes.Buffer
+	if err := json.Compact(&out, []byte(in)); err != nil {
+		return in
+	}
+	return out.String()
+}
