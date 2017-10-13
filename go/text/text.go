@@ -39,6 +39,28 @@ var sourceCharacters = map[rune]rune{
 	'ý': 'y', 'ự': 'y', 'Ý': 'Y', 'Ụ': 'Y',
 }
 
+func Substring(in string, start int, length uint) string {
+	if length > 0 {
+		size := len(in)
+		if start < 0 {
+			frontIndex := size + start
+			if frontIndex < 0 {
+				return ""
+			}
+			start = frontIndex
+		}
+		if start >= size {
+			return ""
+		}
+		rearIndex := start + int(length)
+		if rearIndex >= size {
+			return in[start:]
+		}
+		return in[start:rearIndex]
+	}
+	return ""
+}
+
 func HumanizeString(str string) string {
 	var human []rune
 	for i, l := range str {

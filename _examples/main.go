@@ -475,11 +475,26 @@ func humanizestrings() {
 	fmt.Println("Humanize 31                       >", text.ToOrdinise(31))
 }
 
-func cleantext() {
+func substrings() {
 	fmt.Println("")
 	fmt.Println("TEXT CLEAN TEXT *******************************************************")
 	fmt.Println("CLEAN TEXT OF FOREIGN CHARS       >", text.CleanTextForeignCharacters("testing"))
 	fmt.Println("CLEAN TEXT OF FOREIGN CHARS       >", text.CleanTextForeignCharacters("Je prends une thé chaud, s'il vous plaît"))
+}
+
+func cleantext() {
+	fmt.Println("")
+	testString := "This is a test string that you can use for any purposes."
+	fmt.Println("TEXT SUBSTRING *******************************************************")
+	fmt.Println("TEXT SUBSTRING 0,4                >", text.Substring(testString, 0, 4))
+	fmt.Println("TEXT SUBSTRING -5,4               >", text.Substring(testString, -5, 4))
+	fmt.Println("TEXT SUBSTRING 10,11              >", text.Substring(testString, 10, 11))
+	fmt.Println("TEXT SUBSTRING -13,3              >", text.Substring(testString, -13, 3))
+	fmt.Println("TEXT SUBSTRING 38,100             >", text.Substring(testString, 38, 100))
+	fmt.Println("TEXT SUBSTRING -13,100            >", text.Substring(testString, -13, 100))
+	fmt.Println("TEXT SUBSTRING 60,1               >", text.Substring(testString, 60, 1))
+	fmt.Println("TEXT SUBSTRING -60,1              >", text.Substring(testString, -60, 1))
+	fmt.Println("TEXT SUBSTRING 0,0                >", text.Substring(testString, 0, 0))
 }
 
 func uuid() {
@@ -526,6 +541,8 @@ func announcements() {
 func textfuncs() {
 	time.Sleep(1 * time.Second)
 	humanizestrings()
+	time.Sleep(1 * time.Second)
+	substrings()
 	time.Sleep(1 * time.Second)
 	cleantext()
 	time.Sleep(1 * time.Second)
