@@ -47,6 +47,8 @@ const (
 	DIAMOND        = "♢"
 	SPADE          = "♤"
 	CLUB           = "♧"
+	BLOCK          = "█"
+	BLOCK2         = " "
 )
 
 const (
@@ -94,6 +96,11 @@ func Italic(str string) string {
 }
 
 func Background(str string, color string) string {
+	return fmt.Sprintf("%s%s%s", getBgColor(color), str, RESET)
+}
+
+func Block(count int, color string) string {
+	str := strings.Repeat(BLOCK2, count)
 	return fmt.Sprintf("%s%s%s", getBgColor(color), str, RESET)
 }
 

@@ -40,6 +40,7 @@ import (
 	"../terminal/rainbow"
 	"../terminal/table"
 	"../web/template"
+	"github.com/robjporter/go-functions/colors"
 )
 
 var cronjob, cronjob2 *cron.CronJob
@@ -1537,6 +1538,7 @@ func lines() {
 	fmt.Println("TERMINAL LINES **********************************************")
 	fmt.Println("TERMINAL THINK LINE                >", display.ThickLine(40))
 	fmt.Println("TERMINAL THIN LINE                 >", display.ThinLine(40))
+	fmt.Println("TERMINAL SLASH LINE                >", display.Slashes(40))
 	fmt.Println("TERMINAL SPECIAL LINE              >", display.SpecialLine(40))
 	fmt.Println("TERMINAL SPACE LINE                >", display.SpaceLine(40))
 }
@@ -1546,6 +1548,15 @@ func displayfuncs() {
 	terminalsize()
 	time.Sleep(1 * time.Second)
 	lines()
+}
+
+func colourblocks() {
+	fmt.Println("")
+	fmt.Println("COLOUR BLOCKS **********************************************")
+	fmt.Println("COLOURS BLOCK RED                  >", colours.Block(10, colors.RED))
+	fmt.Println("COLOURS BLOCK BLUE                 >", colours.Block(10, colors.BLUE))
+	fmt.Println("COLOURS BLOCK WHITE                >", colours.Block(10, colors.WHITE))
+	fmt.Println("COLOURS BLOCK MIXED                >", colours.Block(4, colors.WHITE), colours.Block(2, colors.RED), colours.Block(4, colors.WHITE))
 }
 
 func coloureffects() {
@@ -1653,6 +1664,8 @@ func colouricons() {
 }
 
 func colourfuncs() {
+	time.Sleep(1 * time.Second)
+	colourblocks()
 	time.Sleep(1 * time.Second)
 	coloureffects()
 	time.Sleep(1 * time.Second)

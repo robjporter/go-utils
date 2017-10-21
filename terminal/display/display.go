@@ -64,6 +64,12 @@ func ThickLine(n int) (l string) {
 	return l + "\n"
 }
 
+func Slashes(n int) (l string) {
+	l = strings.Repeat("/", n/2)
+	l = l + strings.Repeat("\\", n/2)
+	return l + "\n"
+}
+
 // StrThinLine returns a thin line (using '-')
 func ThinLine(n int) (l string) {
 	l = strings.Repeat("-", n)
