@@ -34,13 +34,11 @@ import (
 	"../system/signals"
 	"../system/timing"
 	"../system/users"
-	"../terminal/banner"
 	"../terminal/colours"
 	"../terminal/display"
 	"../terminal/rainbow"
 	"../terminal/table"
 	"../web/template"
-	"github.com/robjporter/go-functions/colors"
 )
 
 var cronjob, cronjob2 *cron.CronJob
@@ -1550,13 +1548,40 @@ func displayfuncs() {
 	lines()
 }
 
+func colourbanners() {
+	banner()
+}
+
+func banner() string {
+	str := colours.Blocks("{{@brightblue}}{{@!BLANK(80)}}\n")
+	str += colours.Blocks("{{@red}}{{@!BLANK(18)}}{{@brightblue}}{{@!BLANK(16)}}{{@black}}{{@!BLANK(30)}}{{@brightblue}}{{@!BLANK(16)}}\n")
+	str += colours.Blocks("{{@red}}{{@!BLANK(32)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(30)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(14)}}\n")
+	str += colours.Blocks("{{@brightred}}{{@!BLANK(4)}}{{@red}}{{@!BLANK(26)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@magenta}}{{@!BLANK(22)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(12)}}\n")
+	str += colours.Blocks("{{@brightred}}{{@!BLANK(30)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@magenta}}{{@!BLANK(16)}}{{@black}}{{@!BLANK(4)}}{{@magenta}}{{@!BLANK(6)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(4)}}{{@brightblue}}{{@!BLANK(6)}}\n")
+	str += colours.Blocks("{{@brightred}}{{@!BLANK(30)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(16)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(6)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(4)}}\n")
+	str += colours.Blocks("{{@brightyellow}}{{@!BLANK(18)}}{{@brightred}}{{@!BLANK(12)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(16)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@magenta}}{{@!BLANK(6)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(4)}}\n")
+	str += colours.Blocks("{{@brightyellow}}{{@!BLANK(22)}}{{@black}}{{@!BLANK(2)}}{{@brightyellow}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(16)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(8)}}{{@white}}{{@!BLANK(8)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(4)}}\n")
+	str += colours.Blocks("{{@brightyellow}}{{@!BLANK(20)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(2)}}{{@brightyellow}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(16)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(22)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(4)}}\n")
+	str += colours.Blocks("{{@brightgreen}}{{@!BLANK(18)}}{{@brightyellow}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(8)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(14)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(26)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(2)}}\n")
+	str += colours.Blocks("{{@brightgreen}}{{@!BLANK(22)}}{{@white}}{{@!BLANK(8)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(14)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@brightyellow}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(10)}}{{@brightyellow}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(2)}}\n")
+	str += colours.Blocks("{{@brightgreen}}{{@!BLANK(22)}}{{@black}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(14)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(2)}}\n")
+	str += colours.Blocks("{{@blue}}{{@!BLANK(18)}}{{@brightgreen}}{{@!BLANK(8)}}{{@black}}{{@!BLANK(6)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(14)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@magenta}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(16)}}{{@magenta}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(2)}}\n")
+	str += colours.Blocks("{{@blue}}{{@!BLANK(30)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@magenta}}{{@!BLANK(14)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(12)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(4)}}\n")
+	str += colours.Blocks("{{@brightblue}}{{@!BLANK(18)}}{{@blue}}{{@!BLANK(10)}}{{@black}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(6)}}{{@magenta}}{{@!BLANK(14)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(18)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(6)}}\n")
+	str += colours.Blocks("{{@brightblue}}{{@!BLANK(26)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(20)}}{{@black}}{{@!BLANK(18)}}{{@brightblue}}{{@!BLANK(8)}}\n")
+	str += colours.Blocks("{{@brightblue}}{{@!BLANK(24)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(6)}}{{@black}}{{@!BLANK(32)}}{{@white}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(12)}}\n")
+	str += colours.Blocks("{{@brightblue}}{{@!BLANK(24)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(2)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@brightblue}}{{@!BLANK(12)}}{{@black}}{{@!BLANK(2)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(4)}}{{@white}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(2)}}{{@brightblue}}{{@!BLANK(12)}}\n")
+	str += colours.Blocks("{{@brightblue}}{{@!BLANK(24)}}{{@black}}{{@!BLANK(6)}}{{@brightblue}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(6)}}{{@brightblue}}{{@!BLANK(12)}}{{@black}}{{@!BLANK(6)}}{{@brightblue}}{{@!BLANK(4)}}{{@black}}{{@!BLANK(6)}}{{@brightblue}}{{@!BLANK(12)}}\n")
+	str += colours.Blocks("{{@brightblue}}{{@!BLANK(80)}}\n")
+	return str
+}
+
 func colourblocks() {
 	fmt.Println("")
 	fmt.Println("COLOUR BLOCKS **********************************************")
-	fmt.Println("COLOURS BLOCK RED                  >", colours.Block(10, colors.RED))
-	fmt.Println("COLOURS BLOCK BLUE                 >", colours.Block(10, colors.BLUE))
-	fmt.Println("COLOURS BLOCK WHITE                >", colours.Block(10, colors.WHITE))
-	fmt.Println("COLOURS BLOCK MIXED                >", colours.Block(4, colors.WHITE), colours.Block(2, colors.RED), colours.Block(4, colors.WHITE))
+	fmt.Println("COLOURS BLOCK RED                  >", colours.Blocks("{{@brightblue}}{{@!BLANK(80)}}\n"))
+	fmt.Println("COLOURS BLOCK BLUE                 >", colours.Blocks("{{@brightblue}}{{@!BLANK(40)}}{{@red}}{{@!BLANK(40)}}\n"))
+	fmt.Println("COLOURS BLOCK WHITE                >", colours.Blocks("{{@brightblue}}This is a test.{{@red}}This is the second test"))
 }
 
 func coloureffects() {
@@ -1664,6 +1689,8 @@ func colouricons() {
 }
 
 func colourfuncs() {
+	time.Sleep(1 * time.Second)
+	colourbanners()
 	time.Sleep(1 * time.Second)
 	colourblocks()
 	time.Sleep(1 * time.Second)

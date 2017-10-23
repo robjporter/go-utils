@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -47,8 +49,7 @@ const (
 	DIAMOND        = "♢"
 	SPADE          = "♤"
 	CLUB           = "♧"
-	BLOCK          = "█"
-	BLOCK2         = " "
+	BLOCK          = " "
 )
 
 const (
@@ -83,6 +84,51 @@ func getBgColor(code string) string {
 	return fmt.Sprintf("\u001b[4%sm", code)
 }
 
+func getColorCode(color string) string {
+	if color == "black" {
+		return fmt.Sprintf("\u001b[4%sm", BLACK)
+	} else if color == "brightblack" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTBLACK)
+	} else if color == "red" {
+		return fmt.Sprintf("\u001b[4%sm", RED)
+	} else if color == "brightred" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTRED)
+	} else if color == "green" {
+		return fmt.Sprintf("\u001b[4%sm", GREEN)
+	} else if color == "brightgreen" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTGREEN)
+	} else if color == "yellow" {
+		return fmt.Sprintf("\u001b[4%sm", YELLOW)
+	} else if color == "brightyellow" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTYELLOW)
+	} else if color == "blue" {
+		return fmt.Sprintf("\u001b[4%sm", BLUE)
+	} else if color == "brightblue" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTBLUE)
+	} else if color == "magenta" {
+		return fmt.Sprintf("\u001b[4%sm", MAGENTA)
+	} else if color == "brightmagenta" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTMAGENTA)
+	} else if color == "cyan" {
+		return fmt.Sprintf("\u001b[4%sm", CYAN)
+	} else if color == "brightcyan" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTCYAN)
+	} else if color == "white" {
+		return fmt.Sprintf("\u001b[4%sm", WHITE)
+	} else if color == "brightwhite" {
+		return fmt.Sprintf("\u001b[4%sm", BRIGHTWHITE)
+	}
+	return ""
+}
+
+func getBlockSpace(count int) string {
+	return strings.Repeat(BLOCK, count)
+}
+
+func getBlank(count int) string {
+	return strings.Repeat(BLOCK, count)
+}
+
 func Bold(str string) string {
 	return fmt.Sprintf("%s%s%s", BOLD, str, RESET)
 }
@@ -96,11 +142,6 @@ func Italic(str string) string {
 }
 
 func Background(str string, color string) string {
-	return fmt.Sprintf("%s%s%s", getBgColor(color), str, RESET)
-}
-
-func Block(count int, color string) string {
-	str := strings.Repeat(BLOCK2, count)
 	return fmt.Sprintf("%s%s%s", getBgColor(color), str, RESET)
 }
 
@@ -317,4 +358,77 @@ func BannerPrintLineCommentS(s string, comment string, number int) string {
 		str += s
 	}
 	return str
+}
+
+func replaceStringWithColor(color string) string {
+	c := ""
+	var re = regexp.MustCompile(`\{\{@(\w*)\}\}`)
+	results := re.FindAllStringSubmatch(color, -1)
+	// Replace all colors with color code
+	if results != nil {
+		for i := 0; i < len(results); i++ {
+			c = getColorCode(results[i][1])
+		}
+	}
+	return c
+}
+
+func replaceStringWithFunction(function string) string {
+	replace := ""
+	re := regexp.MustCompile(`\{\{@!(\w*)\((\d+)\)\}\}`)
+	results := re.FindAllStringSubmatch(function, -1)
+	// Replace all functions with function output
+	if results != nil {
+		for i := 0; i < len(results); i++ {
+			if results[i][1] == "BLANK" {
+				num, err := strconv.Atoi(results[i][2])
+				if err == nil {
+					replace = getBlockSpace(num)
+				}
+			}
+		}
+	}
+	return replace
+}
+
+func insteadOfString(str string) string {
+	re := regexp.MustCompile(`(\{\{@\w*\}\})`)
+	results := re.FindAllStringSubmatch(str, -1)
+	if results != nil {
+		return strings.Replace(str, results[0][0], "", 1)
+	}
+	return ""
+}
+
+func Blocks(str string) string {
+	pos := 1
+	tmp := ""
+	splits := strings.Split(str, "{{")
+	for i := 1; i < len(splits); i++ {
+		splits[i] = "{{" + splits[i]
+	}
+	for pos < len(splits) {
+		if strings.HasPrefix(splits[pos], "{{@") {
+			tmp += replaceStringWithColor(splits[pos])
+			if pos+1 < len(splits) {
+				if strings.HasPrefix(splits[pos+1], "{{@!") {
+					tmp += replaceStringWithFunction(splits[pos+1])
+					pos += 2
+				} else {
+					tmp += insteadOfString(splits[pos])
+					pos += 1
+				}
+			} else {
+				tmp += insteadOfString(splits[pos])
+				pos += 1
+			}
+
+		}
+	}
+	if strings.HasSuffix(str, "\n") {
+		tmp += RESET + "\n"
+	} else {
+		tmp += RESET
+	}
+	return tmp
 }
