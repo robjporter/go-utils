@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/robjporter/go-utils/go/as"
-	yaml "pkg.re/yaml.v2"
+	yaml "gopkg.in/yaml.v2"
 )
 
 type Config struct {
