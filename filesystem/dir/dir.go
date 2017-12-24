@@ -2,7 +2,6 @@ package dir
 
 import (
 	"bytes"
-	"path/filepath"
 	"io/ioutil"
 	"log"
 	"os"
