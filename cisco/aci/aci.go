@@ -121,7 +121,7 @@ func getJSONData(jsonstr string, element string) string {
 		json.Unmarshal([]byte(jsonstr), &data2)
 
 		tmp, err := "", "" //jmespath.Search(element, data2)
-		if err == nil {
+		if err == "" {
 			output = as.ToString(tmp)
 		}
 	}

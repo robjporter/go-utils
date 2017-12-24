@@ -89,9 +89,9 @@ func getLatestFromContent(data []string) (string, string, string, string) {
 	currentRelease := int64(0)
 	currentBuild := int64(0)
 	for i := 0; i < len(data); i++ {
-		tmpMajor := as.ToInt(getVersionMajor(data[i]))
-		tmpMinor := as.ToInt(getVersionMinor(data[i]))
-		tmpRelease := as.ToInt(getVersionRelease(data[i]))
+		tmpMajor := as.ToInt64(getVersionMajor(data[i]))
+		tmpMinor := as.ToInt64(getVersionMinor(data[i]))
+		tmpRelease := as.ToInt64(getVersionRelease(data[i]))
 		tmpBuild := alphabetPosition(getVersionBuild(data[i]))
 		if tmpMajor > currentMajor && tmpMinor > currentMinor && tmpRelease > currentRelease && tmpBuild > currentBuild {
 			currentMajor = tmpMajor
@@ -109,9 +109,9 @@ func getLatestFromContentTrain(data []string, train string) (string, string, str
 	currentRelease := int64(0)
 	currentBuild := int64(0)
 	for i := 0; i < len(data); i++ {
-		tmpMajor := as.ToInt(getVersionMajor(data[i]))
-		tmpMinor := as.ToInt(getVersionMinor(data[i]))
-		tmpRelease := as.ToInt(getVersionRelease(data[i]))
+		tmpMajor := as.ToInt64(getVersionMajor(data[i]))
+		tmpMinor := as.ToInt64(getVersionMinor(data[i]))
+		tmpRelease := as.ToInt64(getVersionRelease(data[i]))
 		tmpBuild := alphabetPosition(getVersionBuild(data[i]))
 		if tmpMajor > currentMajor && tmpMinor > currentMinor && tmpRelease > currentRelease && tmpBuild > currentBuild {
 			currentMajor = tmpMajor
