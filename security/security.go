@@ -6,6 +6,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"io"
+	"strings"
 
 	"github.com/robjporter/go-utils/go/as"
 )
@@ -24,11 +25,11 @@ func decodeBase64(s string) []byte {
 
 func bufferSecurityKey(key string) string {
 	if len(key) < 16 {
-		return RightPad2Len(key, "0", 16)
+		return rightPad2Len(key, "0", 16)
 	} else if len(key) > 16 && len(key) < 24 {
-		return RightPad2Len(key, "0", 24)
+		return rightPad2Len(key, "0", 24)
 	} else if len(key) > 24 && len(key) < 32 {
-		return RightPad2Len(key, "0", 32)
+		return rightPad2Len(key, "0", 32)
 	} else if len(key) > 32 {
 		return key[:31]
 	}
@@ -74,4 +75,18 @@ func Decrypt(key []byte, b64 string) string {
 	cfb := cipher.NewCFBDecrypter(block, iv)
 	cfb.XORKeyStream(text, text)
 	return string(text)
+}
+
+func rightPad2Len(s string, padStr string, overallLen int) string {
+	var padCountInt int
+	padCountInt = 1 + ((overallLen - len(padStr)) / len(padStr))
+	var retStr = s + strings.Repeat(padStr, padCountInt)
+	return retStr[:overallLen]
+}
+
+func leftPad2Len(s string, padStr string, overallLen int) string {
+	var padCountInt int
+	padCountInt = 1 + ((overallLen - len(padStr)) / len(padStr))
+	var retStr = strings.Repeat(padStr, padCountInt) + s
+	return retStr[(len(retStr) - overallLen):]
 }
